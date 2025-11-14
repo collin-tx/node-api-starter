@@ -1,12 +1,15 @@
 import express from "express";
+import router from "./routes/index.js";
+import { errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-// middleware
 app.use(express.json());
 
-// routes
-import router from "./routes/index.js";
+// Routes
 app.use("/api", router);
+
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 export default app;
